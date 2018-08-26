@@ -33,8 +33,8 @@ public class SpanInitHandler implements Handler {
                 new MultiValueMapExtractor(context.getRequest().getHeaders().asMultiValueMap()));
 
         Span span = tracer.buildSpan(operationNameProvider.provideOperationName(context))
-                .asChildOf(extractedContext)
                 .ignoreActiveSpan()
+                .asChildOf(extractedContext)
                 .withTag(Tags.SPAN_KIND.getKey(), Tags.SPAN_KIND_SERVER)
                 .withTag(Tags.COMPONENT.getKey(), COMPONENT_NAME)
                 .start();

@@ -10,7 +10,7 @@ public interface ServerOperationNameProvider {
         @Override
         public String provideOperationName(Context context) {
             Request request = context.getRequest();
-            return request.getMethod().getName() + " " + request.getPath();
+            return request.getMethod().getName() + " " + request.getUri();
         }
     }
 }
