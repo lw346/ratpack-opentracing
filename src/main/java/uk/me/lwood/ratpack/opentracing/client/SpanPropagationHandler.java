@@ -57,6 +57,15 @@ public class SpanPropagationHandler implements Handler {
                     span.finish();
                 }
             });
+
+            spec.errorIntercept(error -> {
+                Span span = spanReference.get();
+                if (span != null) {
+                    clientSpanDecorators.forEach(decorator -> decorator.onError(error, span));
+
+                    span.finish();
+                }
+            });
         });
 
         ctx.next(Registry.single(client));

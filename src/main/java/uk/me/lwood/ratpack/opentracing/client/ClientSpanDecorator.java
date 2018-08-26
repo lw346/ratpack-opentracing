@@ -33,7 +33,7 @@ public interface ClientSpanDecorator {
      * @param ex exception
      * @param span span to decorate
      */
-    void onError(Exception ex, Span span);
+    void onError(Throwable ex, Span span);
 
     class StandardTags implements ClientSpanDecorator {
         @Override
@@ -52,7 +52,7 @@ public interface ClientSpanDecorator {
         }
 
         @Override
-        public void onError(Exception ex, Span span) {
+        public void onError(Throwable ex, Span span) {
             Tags.ERROR.set(span, Boolean.TRUE);
 
             Map<String, Object> errorLogs = new HashMap<>(2);
