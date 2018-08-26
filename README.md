@@ -40,3 +40,48 @@ RatpackServer server = RatpackServer.of(
     ...
 )
 ```
+
+## Integrating with Jaeger
+
+```java
+public class JaegerModule extends AbstractModule {
+    @Override
+    public void configure() {
+        JaegerTracer tracer = Configuration.fromEnv("my-service")
+            .getTracer();
+
+        // Expose the Tracer to other dependencies
+        bind(Tracer.class).toInstance(tracer);
+
+        // Install the interceptor and bind our custom handlers
+        bind(SpanExecInterceptor.class).toInstance(new SpanExecInterceptor(tracer));
+        bind(SpanPropagationHandler.class).toInstance(new SpanPropagationHandler(
+            tracer,
+            singletonList(new ClientSpanDecorator.StandardTags()),
+            new ServerOperationNameProvider.MethodAndPath()));
+        bind(SpanInitHandler.class).toInstance(new SpanInitHandler(
+            tracer,
+            singletonList(new ServerSpanDecorator.StandardTags()),
+            new ServerOperationNameProvider.MethodAndPath()));
+
+        // Ensure that the reporter and sampler are stopped on shutdown
+        bind(JaegerTracerService.class).toInstance(new JaegerTracerService(tracer));
+    }
+
+    private class JaegerTracerService implements Service {
+        private final JaegerTracer tracer;
+
+        public JaegerTracerService(JaegerTracer tracer) {
+            this.tracer = tracer;
+        }
+
+        public void onStart(StartEvent event) {
+            // do nothing
+        }
+
+        public void onStop(StopEvent event) {
+            tracer.close();
+        }
+    }
+}
+```
