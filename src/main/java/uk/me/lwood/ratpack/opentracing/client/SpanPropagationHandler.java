@@ -9,7 +9,6 @@ import ratpack.handling.Handler;
 import ratpack.http.client.HttpClient;
 import ratpack.registry.Registry;
 
-import javax.inject.Inject;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -32,7 +31,6 @@ public class SpanPropagationHandler implements Handler {
     private final List<ClientSpanDecorator> clientSpanDecorators;
     private final ClientOperationNameProvider operationNameProvider;
 
-    @Inject
     public SpanPropagationHandler(Tracer tracer, List<ClientSpanDecorator> clientSpanDecorators, ClientOperationNameProvider operationNameProvider) {
         this.tracer = tracer;
         this.clientSpanDecorators = clientSpanDecorators;

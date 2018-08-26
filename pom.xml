@@ -56,7 +56,7 @@
 
     <dependency>
       <groupId>io.ratpack</groupId>
-      <artifactId>ratpack-guice</artifactId>
+      <artifactId>ratpack-core</artifactId>
       <version>${ratpack.version}</version>
     </dependency>
 

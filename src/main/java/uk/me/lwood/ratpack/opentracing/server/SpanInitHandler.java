@@ -10,7 +10,6 @@ import ratpack.handling.Context;
 import ratpack.handling.Handler;
 import ratpack.registry.Registry;
 
-import javax.inject.Inject;
 import java.util.List;
 
 /**
@@ -29,7 +28,6 @@ public class SpanInitHandler implements Handler {
     private final List<ServerSpanDecorator> serverSpanDecorators;
     private final ServerOperationNameProvider operationNameProvider;
 
-    @Inject
     public SpanInitHandler(Tracer tracer, List<ServerSpanDecorator> serverSpanDecorators, ServerOperationNameProvider operationNameProvider) {
         this.tracer = tracer;
         this.serverSpanDecorators = serverSpanDecorators;
