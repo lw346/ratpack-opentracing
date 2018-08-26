@@ -9,6 +9,9 @@ import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Decorates the span at each phase of execution.  Decorators should not call finish().
+ */
 public interface ClientSpanDecorator {
 
     /**

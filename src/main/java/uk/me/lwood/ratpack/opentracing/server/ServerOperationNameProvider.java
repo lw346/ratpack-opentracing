@@ -3,9 +3,15 @@ package uk.me.lwood.ratpack.opentracing.server;
 import ratpack.handling.Context;
 import ratpack.http.Request;
 
+/**
+ * Provides the operation-name for a server span initiated by the {@link SpanInitHandler}
+ */
 public interface ServerOperationNameProvider {
-    public String provideOperationName(Context context);
+    String provideOperationName(Context context);
 
+    /**
+     * Produces "METHOD /path" as the operation-name
+     */
     class MethodAndPath implements ServerOperationNameProvider {
         @Override
         public String provideOperationName(Context context) {

@@ -13,6 +13,15 @@ import ratpack.registry.Registry;
 import javax.inject.Inject;
 import java.util.List;
 
+/**
+ * Initialises a server side span on the {@link Tracer} by attempting to extract a parent span from the HTTP headers
+ * sent over the wire.
+ *
+ * {@link ServerSpanDecorator}s are used to decorate the resulting server span, and {@link ServerOperationNameProvider}
+ * is used to determine the name of the operation that this span represents.
+ *
+ * This handler should be inserted at the start of the chain using {@link ratpack.handling.Chain#all(Handler)}.
+ */
 public class SpanInitHandler implements Handler {
     static final String COMPONENT_NAME = "ratpack-server";
 

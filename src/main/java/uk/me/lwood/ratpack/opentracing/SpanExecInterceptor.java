@@ -10,6 +10,10 @@ import ratpack.handling.Context;
 
 import javax.inject.Inject;
 
+/**
+ * Intercepts the execution of any blocks to set the active span on the Tracer implementation.  This allows users
+ * to invoke {@link Tracer#buildSpan(String)} and have it automatically pick up the active span as the parent span.
+ */
 public class SpanExecInterceptor implements ExecInterceptor {
     private final Tracer tracer;
 

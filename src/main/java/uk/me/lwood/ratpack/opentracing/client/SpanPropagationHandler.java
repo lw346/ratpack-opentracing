@@ -13,6 +13,18 @@ import javax.inject.Inject;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ * Replaces the {@link HttpClient} with a per-request instance that will initialise a client side span on the
+ * {@link Tracer} as a child of the current active Span, and forward the Span details as HTTP headers over the wire
+ * to the remote downstream.
+ *
+ * {@link ClientSpanDecorator}s are used to decorate the resulting client span, and {@link ClientOperationNameProvider}
+ * is used to determine the name of the operation that this span represents.
+ *
+ * This handler should be inserted at the start of the chain using {@link ratpack.handling.Chain#all(Handler)}, after
+ * the {@link uk.me.lwood.ratpack.opentracing.server.SpanInitHandler} (such that there is a Span available in the
+ * Context registry).
+ */
 public class SpanPropagationHandler implements Handler {
     static final String COMPONENT_NAME = "ratpack-client";
 
