@@ -18,8 +18,8 @@ public class SpanInitHandlerTest {
 
     private SpanInitHandler handler = new SpanInitHandler(
             mockTracer,
-            singletonList(new ServerSpanDecorator.StandardTags()),
-            new ServerOperationNameProvider.MethodAndPath());
+            singletonList(ServerSpanDecorator.StandardTags),
+            ServerOperationNameProvider.MethodAndPath);
 
     @After
     public void cleanUp() {

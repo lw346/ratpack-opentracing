@@ -4,6 +4,7 @@ import io.opentracing.Span;
 import io.opentracing.tag.Tags;
 import ratpack.http.client.HttpResponse;
 import ratpack.http.client.RequestSpec;
+import uk.me.lwood.ratpack.opentracing.server.ServerSpanDecorator;
 
 import java.net.URI;
 import java.util.HashMap;
@@ -38,7 +39,7 @@ public interface ClientSpanDecorator {
      */
     void onError(Throwable ex, Span span);
 
-    class StandardTags implements ClientSpanDecorator {
+    ClientSpanDecorator StandardTags = new ClientSpanDecorator() {
         @Override
         public void onRequest(RequestSpec request, Span span) {
             Tags.HTTP_METHOD.set(span, request.getMethod().getName());
@@ -63,6 +64,6 @@ public interface ClientSpanDecorator {
             errorLogs.put("error.object", ex);
             span.log(errorLogs);
         }
-    }
+    };
 
 }

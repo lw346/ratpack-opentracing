@@ -11,8 +11,8 @@ headers, you will need to add the `SpanInitHandler` to your chain:
 
 ```java
 Tracer tracer = ...;
-List<ServerSpanDecorator> decorators = singletonList(new ServerSpanDecorator.StandardTags());
-ServerOperationNameProvider nameProvider = new ServerOperationNameProvider.MethodAndPath();
+List<ServerSpanDecorator> decorators = singletonList(ServerSpanDecorator.StandardTags);
+ServerOperationNameProvider nameProvider = ServerOperationNameProvider.MethodAndPath;
 
 RatpackServer server = RatpackServer.of(
     chain -> chain.all(new SpanInitHandler(tracer, decorators, nameProvider)),
@@ -29,8 +29,8 @@ To propagate the span information to downstream clients using Ratpack's built-in
 
 ```java
 Tracer tracer = ...;
-List<ClientSpanDecorator> decorators = singletonList(new ClientSpanDecorator.StandardTags());
-ClientOperationNameProvider nameProvider = new ClientOperationNameProvider.MethodAndPath();
+List<ClientSpanDecorator> decorators = singletonList(ClientSpanDecorator.StandardTags);
+ClientOperationNameProvider nameProvider = ClientOperationNameProvider.MethodAndPath;
 
 RatpackServer server = RatpackServer.of(
     chain -> chain
@@ -57,12 +57,12 @@ public class JaegerModule extends AbstractModule {
         bind(SpanExecInterceptor.class).toInstance(new SpanExecInterceptor(tracer));
         bind(SpanPropagationHandler.class).toInstance(new SpanPropagationHandler(
             tracer,
-            singletonList(new ClientSpanDecorator.StandardTags()),
-            new ServerOperationNameProvider.MethodAndPath()));
+            singletonList(ClientSpanDecorator.StandardTags),
+            ServerOperationNameProvider.MethodAndPath));
         bind(SpanInitHandler.class).toInstance(new SpanInitHandler(
             tracer,
-            singletonList(new ServerSpanDecorator.StandardTags()),
-            new ServerOperationNameProvider.MethodAndPath()));
+            singletonList(ServerSpanDecorator.StandardTags),
+            ServerOperationNameProvider.MethodAndPath));
 
         // Ensure that the reporter and sampler are stopped on shutdown
         bind(JaegerTracerService.class).toInstance(new JaegerTracerService(tracer));

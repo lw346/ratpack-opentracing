@@ -26,13 +26,13 @@ public class SpanPropagationHandlerTest {
 
     private SpanInitHandler initHandler = new SpanInitHandler(
             mockTracer,
-            singletonList(new ServerSpanDecorator.StandardTags()),
-            new ServerOperationNameProvider.MethodAndPath());
+            singletonList(ServerSpanDecorator.StandardTags),
+            ServerOperationNameProvider.MethodAndPath);
 
     private SpanPropagationHandler handler = new SpanPropagationHandler(
             mockTracer,
-            singletonList(new ClientSpanDecorator.StandardTags()),
-            new ClientOperationNameProvider.MethodAndPath()
+            singletonList(ClientSpanDecorator.StandardTags),
+            ClientOperationNameProvider.MethodAndPath
     );
 
     @After

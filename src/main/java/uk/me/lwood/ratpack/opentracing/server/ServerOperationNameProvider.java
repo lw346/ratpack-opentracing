@@ -12,11 +12,8 @@ public interface ServerOperationNameProvider {
     /**
      * Produces "METHOD /path" as the operation-name
      */
-    class MethodAndPath implements ServerOperationNameProvider {
-        @Override
-        public String provideOperationName(Context context) {
-            Request request = context.getRequest();
-            return request.getMethod().getName() + " " + request.getUri();
-        }
-    }
+    ServerOperationNameProvider MethodAndPath = context -> {
+        Request request = context.getRequest();
+        return request.getMethod().getName() + " " + request.getUri();
+    };
 }

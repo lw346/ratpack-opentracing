@@ -37,7 +37,7 @@ public interface ServerSpanDecorator {
      */
     void onError(Throwable ex, Span span);
 
-    class StandardTags implements ServerSpanDecorator {
+    ServerSpanDecorator StandardTags = new ServerSpanDecorator() {
         @Override
         public void onRequest(Request request, Span span) {
             Tags.HTTP_METHOD.set(span, request.getMethod().getName());
@@ -58,6 +58,6 @@ public interface ServerSpanDecorator {
             errorLogs.put("error.object", ex);
             span.log(errorLogs);
         }
-    }
+    };
 
 }

@@ -11,10 +11,6 @@ public interface ClientOperationNameProvider {
     /**
      * Produces "METHOD /path" as the operation-name
      */
-    class MethodAndPath implements ClientOperationNameProvider {
-        @Override
-        public String provideOperationName(RequestSpec requestSpec) {
-            return requestSpec.getMethod().getName() + " " + requestSpec.getUri().getPath();
-        }
-    }
+    ClientOperationNameProvider MethodAndPath = requestSpec ->
+            requestSpec.getMethod().getName() + " " + requestSpec.getUri().getPath();
 }
