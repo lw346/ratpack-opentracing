@@ -52,7 +52,7 @@
     <project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
 
     <opentracing.version>0.31.0</opentracing.version>
-    <ratpack.version>1.6.0-SNAPSHOT</ratpack.version>
+    <ratpack.version>1.5.4</ratpack.version>
   </properties>
 
   <dependencies>

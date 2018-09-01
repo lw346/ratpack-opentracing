@@ -24,22 +24,6 @@ RatpackServer server = RatpackServer.of(
 In order to support other libraries that expect the active span to be set in a thread-local context, you will need
 to install the `SpanExecInterceptor`.
 
-To propagate the span information to downstream clients using Ratpack's built-in `HttpClient`, you can add the
-`SpanPropagationHandler` to your chain:
-
-```java
-Tracer tracer = ...;
-List<ClientSpanDecorator> decorators = singletonList(ClientSpanDecorator.StandardTags);
-ClientOperationNameProvider nameProvider = ClientOperationNameProvider.MethodAndPath;
-
-RatpackServer server = RatpackServer.of(
-    chain -> chain
-        .all(new SpanInitHandler(...))
-        .all(new SpanPropagationHandler(tracer, decorators, nameProvider)),
-    ...,
-    ...
-)
-```
 
 ## Integrating with Jaeger
 
@@ -55,10 +39,6 @@ public class JaegerModule extends AbstractModule {
 
         // Install the interceptor and bind our custom handlers
         bind(SpanExecInterceptor.class).toInstance(new SpanExecInterceptor(tracer));
-        bind(SpanPropagationHandler.class).toInstance(new SpanPropagationHandler(
-            tracer,
-            singletonList(ClientSpanDecorator.StandardTags),
-            ServerOperationNameProvider.MethodAndPath));
         bind(SpanInitHandler.class).toInstance(new SpanInitHandler(
             tracer,
             singletonList(ServerSpanDecorator.StandardTags),
