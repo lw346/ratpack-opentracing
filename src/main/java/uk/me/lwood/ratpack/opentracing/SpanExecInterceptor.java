@@ -21,7 +21,9 @@ public class SpanExecInterceptor implements ExecInterceptor {
 
     @Override
     public void intercept(Execution execution, ExecType execType, Block block) throws Exception {
-        Span span = execution.maybeGet(Context.class).map(context -> context.get(Span.class)).orElse(null);
+        Span span = execution.maybeGet(Context.class)
+                .map(context -> context.maybeGet(Span.class).orElse(null))
+                .orElse(null);
         if (span != null) {
             try (Scope scope = tracer.scopeManager().activate(span, false)) {
                 block.execute();
