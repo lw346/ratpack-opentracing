@@ -21,12 +21,12 @@ is_pull_request() {
   fi
 }
 
-is_travis_branch_master_or_release() {
-  if [[ "${TRAVIS_BRANCH}" == "master" || "${TRAVIS_BRANCH}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+is_release() {
+  if [[ "${TRAVIS_BRANCH}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
     echo "[Publishing] Travis branch is ${TRAVIS_BRANCH}"
     return 0
   else
-    echo "[Not Publishing] Travis branch is not master or v0.0.0"
+    echo "[Not Publishing] Travis branch is not v0.0.0"
     return 1
   fi
 }
@@ -102,11 +102,7 @@ fi
 ./mvnw install -nsu
 
 # If we are on a pull request, our only job is to run tests, which happened above via ./mvnw install
-if is_pull_request; then
-  true
-# If we are on master, we will deploy the latest snapshot or release version
-#   - If a release commit fails to deploy for a transient reason, delete the broken version from bintray and click rebuild
-elif is_travis_branch_master_or_release; then
+if is_release; then
   ./mvnw --batch-mode -s ./.settings.xml -Prelease -nsu -DskipTests deploy
 
 # If we are on a release tag, the following will update any version references and push a version tag for deployment.
