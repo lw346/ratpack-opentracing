@@ -118,24 +118,6 @@
           <tagNameFormat>@{project.version}</tagNameFormat>
         </configuration>
       </plugin>
-      <plugin>
-        <groupId>org.pitest</groupId>
-        <artifactId>pitest-maven</artifactId>
-        <version>1.4.2</version>
-        <configuration>
-          <coverageThreshold>95</coverageThreshold>
-          <mutationThreshold>95</mutationThreshold>
-        </configuration>
-        <executions>
-          <execution>
-            <id>run-mutation-tests</id>
-            <goals>
-              <goal>mutationCoverage</goal>
-            </goals>
-            <phase>test</phase>
-          </execution>
-        </executions>
-      </plugin>
     </plugins>
   </build>
 
