@@ -21,10 +21,6 @@ install:
 script:
   - ./travis.sh
 
-branches:
-  except:
-    - /^[0-9]/
-
 env:
   global:
   - secure: "fDFNVRXEWVPfOUoeYR3SCH9NtnCCSRapeXHsvWx5Hxiwx0KvYxJ32WpFt6VJ0bbxSOJaZGKuHq34xtDZK8rXt5gJB7xkCtH9q3uPoZbxQvgdtXKBcqsIRc9YkdtBKTk86eW8XvwxiNxb8rIVN8haMfjvoL65j9Jm18+hHEeleQfzCqxLDAp0YHfGL2ixdqLz0BF4pL0hDHywqZOD8EMwp8O3h2jZ9uTzchmMIfGiFqlDW7eSU64QX3rGzikkpknzh4fSm1GOeFRLwfPKk/+AL3PDTQMFZf8mulJ0+k2iClg3Li7d57TQZS+uIx/ogbkHB+ArpHWIbYVHOgIRi6BDeVP7j9TZ/AaXBDQIpSL/210JiJR794SaKMCWsADsXviiVSET+Aq9sZ254QhdhFS5utQ+MOcbLuxI2VNDZuNxJ5sn2w6DXzGLPhue9CXlv8rJuHSYrSZIyt9fXIl/nf9hAkZjYKAs2mzYvMyXjhj5YcrywyZ5r33LKuaoEGzciF0lKlw+1222hs9N3tRkqjdsxon3oKogUyVpYz0tNacUGHaemTU9CG9qU1N8my6FzcjHJ7TxigtC0bs5j6pVTxjdlIIBuWUjyYDOGYf4IdHuSKWDdqX/GvcLmewEqicGXY3pOlehPwCC8DXhhz0s1jbk3AolvWa7D6FkFKSILFTKErg="

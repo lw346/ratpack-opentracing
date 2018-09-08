@@ -22,11 +22,11 @@ is_pull_request() {
 }
 
 is_release() {
-  if [[ "${TRAVIS_BRANCH}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+  if [[ "${TRAVIS_BRANCH}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
     echo "[Publishing] Travis branch is ${TRAVIS_BRANCH}"
     return 0
   else
-    echo "[Not Publishing] Travis branch is not v0.0.0"
+    echo "[Not Publishing] Travis branch is not 0.0.0"
     return 1
   fi
 }
