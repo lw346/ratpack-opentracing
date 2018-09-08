@@ -1,5 +1,8 @@
 # Ratpack OpenTracing support
 
+[ ![Download](https://api.bintray.com/packages/luke/releases/opentracing-ratpack/images/download.svg) ](https://bintray.com/luke/releases/opentracing-ratpack/_latestVersion)
+[![Build Status](https://travis-ci.org/lw346/ratpack-opentracing.svg?branch=master)](https://travis-ci.org/lw346/ratpack-opentracing)
+
 Provides utility classes to hook into Ratpack and provide traces via OpenTracing.
 
 To use this library effectively, you will need to instantiate a `Tracer` implementation.
