@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>uk.me.lwood</groupId>
   <artifactId>opentracing-ratpack</artifactId>
-  <version>0.1.1-SNAPSHOT</version>
+  <version>0.2.0</version>
 
   <name>${project.groupId}:${project.artifactId}</name>
   <description>OpenTracing Instrumentation for Ratpack</description>
@@ -14,7 +14,7 @@
     <url>http://github.com/lw346/ratpack-opentracing</url>
     <connection>scm:git:https://github.com/lw346/ratpack-opentracing.git</connection>
     <developerConnection>scm:git:https://github.com/lw346/ratpack-opentracing.git</developerConnection>
-    <tag>HEAD</tag>
+    <tag>0.2.0</tag>
   </scm>
 
   <licenses>
